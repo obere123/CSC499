@@ -10,7 +10,7 @@ import apiInstance from "./axios";
 
 export const login = async (email,password)=>{
 try {
-    const {data,status}= await axios.post('user/token/',{email,password,});
+    const {data,status}= await apiInstance.post('user/token/',{email,password,});
 
     if(status===200){
 
@@ -25,17 +25,15 @@ try {
         error:error.response.data?.detail || "Something went wrong "
         
     }
-
-    
 }
-
-
 };
 
-export const register= async (fullname, email, password,password2) =>{
+export const register= async (fullname, email,category, password,password2) =>{
 
     try{
-        const {data}= await apiInstance.post('user/register/', {fullname, email,password,password2}); 
+        
+    const {data}= await apiInstance.post('user/register/', {fullname, email, category, password, password2}); 
+        
 
         await login(email,password)
         alert("Registration successful");
@@ -44,9 +42,7 @@ export const register= async (fullname, email, password,password2) =>{
 
     }catch(error){
 return{
-        data:null,
-        error:error.response.data?.detail || "Something went wrong ",
-        
+        error:error.response.data?.detail || "Something went wrong ",    
     };
 
 
