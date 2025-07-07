@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // ✅ React Router Link
 import logo from "../../assets/p2pLogo.jpeg";
+import { useAuthstore } from "../../store/auth";
 
 export default function PresidentNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const {user} = useAuthstore()
+console.log(user)
   return (
     <nav className="bg-[#20508e] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,14 +19,14 @@ export default function PresidentNavBar() {
           {/* Desktop Menu */}
           <div className="max-sm:hidden">
             <div className="flex space-x-6">
-              <Link to="/dashboard" className="hover:text-gray-300">
+              <Link to="/presidentdashboard" className="hover:text-gray-300">
                 Dashboard
               </Link>
-              <Link to="/team" className="hover:text-gray-300">
-                Team
+              <Link to="/pairingview" className="hover:text-gray-300">
+                Pairings
               </Link>
-              <Link to="/projects" className="hover:text-gray-300">
-                Projects
+              <Link to="/addCourse" className="hover:text-gray-300">
+                Add Course
               </Link>
               <Link to="/calendar" className="hover:text-gray-300">
                 Calendar
@@ -73,11 +75,11 @@ export default function PresidentNavBar() {
           <Link to="/dashboard" className="block py-2 hover:text-gray-300">
             Dashboard
           </Link>
-          <Link to="/team" className="block py-2 hover:text-gray-300">
-            Team
+          <Link to="/pairingview" className="block py-2 hover:text-gray-300">
+            Pairings
           </Link>
-          <Link to="/projects" className="block py-2 hover:text-gray-300">
-            Projects
+          <Link to="/addCourse" className="block py-2 hover:text-gray-300">
+            Add Course
           </Link>
           <Link to="/calendar" className="block py-2 hover:text-gray-300">
             Calendar

@@ -6,8 +6,8 @@ export default function TuteeNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-[#20508e] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-[#20508e] text-white w-screen">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
@@ -17,13 +17,13 @@ export default function TuteeNavBar() {
           {/* Desktop Menu */}
           <div className="max-sm:hidden">
             <div className="flex space-x-6">
-              <Link to="/dashboard" className="text-gray-300 hover:text-white">
+              <Link to="/tuteedashboard" className="text-gray-300 hover:text-white">
                 Dashboard
               </Link>
-              <Link to="/team" className="text-gray-300 hover:text-white">
+              <Link to="/tuteecourseapplication" className="text-gray-300 hover:text-white">
                 Apply for Course
               </Link>
-              <Link to="/projects" className="text-gray-300 hover:text-white">
+              <Link to="/tuteepending" className="text-gray-300 hover:text-white">
                 Pending
               </Link>
              
@@ -68,14 +68,14 @@ export default function TuteeNavBar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden px-4 pb-4">
-          <Link to="/dashboard" className="block py-2 hover:text-gray-300">
+          <Link to="/tuteedashboard" className="block py-2 hover:text-gray-300">
             Dashboard
           </Link>
-          <Link to="/team" className="block py-2 hover:text-gray-300">
-            Team
+          <Link to="/tuteecourseapplication" className="block py-2 hover:text-gray-300">
+            Course Application
           </Link>
-          <Link to="/projects" className="block py-2 hover:text-gray-300">
-            Projects
+          <Link to="/tuteepending" className="block py-2 hover:text-gray-300">
+            Pending 
           </Link>
           <Link to="/calendar" className="block py-2 hover:text-gray-300">
             Calendar

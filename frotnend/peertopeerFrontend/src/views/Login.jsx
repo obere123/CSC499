@@ -1,30 +1,71 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../utils/auth'; 
+import { useAuthstore } from '../store/auth';
+import { useAuth } from '../utils/useAuth';
+import jwtDecode from 'jwt-decode';
+//const { isAuthenticated, currentUser, loading: authLoading } = useAuth();
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { isAuthenticated, currentUser, loading: authLoading } = useAuth();
   const navigate=useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
-    const {error} = await login(email, password);
+    const response = await login(email, password);
+    //const response = await login(email, password);
     setIsLoading(false);
 
-    if (error) {
+    if (response.error) {
       // setError(JSON.stringify(response.error, null, 2));
-      alert(error);
+      alert(response.error);
     }else{
+//const { isAuthenticated, currentUser, loading: authLoading } = useAuth();
+//timeout
+ 
+// const userData = response.data.user;
+// useAuthstore.getState().setUser(userData);
 
-   navigate("/home")   
 
+//  const userData = data?.user;
+//  console.log("the category is", userData?.category)
+// if(userData?.category === "Tutee"){
+//    navigate("/tuteedashboard")  }
+   
+//    else if(userData?.category === "Tutor"){
+//     navigate("/tutordashboard")
+//    }
+try {
+      const token = response.data.access;
+      const decodedToken = jwtDecode(token);
+      console.log("Decoded token:", decodedToken);
+      
+      const userCategory = decodedToken.category;
+      
+      if (userCategory === "Tutee") {
+        navigate("/tuteedashboard");
+      } else if (userCategory === "Tutor") {
+        navigate("/tutordashboard");
+      }else if(userCategory==="President"){
+
+       navigate("/presidentdashboard") 
+      }
+
+
+//  navigate("/tuteedashboard")
+    } catch(error){
+      alert(error);
     }
-  };
+  
+  }
+ };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center p-4">

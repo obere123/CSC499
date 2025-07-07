@@ -4,13 +4,13 @@ import apiInstance from "./axios";
 import { useAuthstore } from "../store/auth";
 import { P2Proles } from "./constants";
 
- //const user = useAuthstore((state) => state.user()); //where data will be gotten
+ //const {user} = useAuthstore((state) => state.user()); //where data will be gotten
 //api function call for tutee applying or course
 export const DeleteFromPending=async(email,courseCode)=>{
 try{
 
 await apiInstance.delete(`pending/delete/${email}/${courseCode}/`);
-alert("Deleted Successfully");
+alert("Success");
 
 
 }catch(error){
@@ -19,10 +19,10 @@ alert("Deleted Successfully");
 }
 
 //the function below verifies whether a tutor is available for a tutee and vice versa
-export const VerifyPersonAvailability = async (email, coursecode) => {
+export const VerifyPersonAvailability = async ( coursecode,category) => {
   try {
     const response = await apiInstance.get('pending/', {
-      params: { email, coursecode },
+      params: {  coursecode, category},
     });
 
     const data = response.data;
@@ -43,12 +43,13 @@ export const VerifyPersonAvailability = async (email, coursecode) => {
 
 export const CourseApplication=async(email,category, coursecode)=>{
 try{
-if (!VerifyPersonAvailability(email,coursecode)){
-await apiInstance.post('/pending', { email, category, coursecode});
+if (!(await VerifyPersonAvailability(coursecode,P2Proles[category]))){
+await apiInstance.post('pending/', { email, category, coursecode});
+return;
 //return data 
 }else{
    try{
- const response= await apiInstance.get('/pending', {
+ const response= await apiInstance.get('pending/', {
         params: {category:P2Proles[category],coursecode},
     } );
     //variable to store the name from func above c
@@ -57,9 +58,25 @@ await apiInstance.post('/pending', { email, category, coursecode});
 
     try{
         if(category==="Tutor"){
-            await apiInstance.post('pairing/',{tutorEmail:email,tuteeEmail:obtainedEmail,coursecode:coursecode} );
+try{
+              await apiInstance.post('pairing/',{tutorEmail:email,tuteeEmail:obtainedEmail,coursecode:coursecode} );
+            //await DeleteFromPending(email,coursecode);
+            await DeleteFromPending(obtainedEmail,coursecode);
+            
+            
+            
+            }catch(error){
+                console.log("Obere error is",error.response.data);
+              }
+            //delete shit 
         } else if(category==="Tutee"){
-              await apiInstance.post('pairing/',{tutorEmail:obtainedEmail,tuteeEmail:email,coursecode:coursecode} );
+            console.log("The data is", mydata);
+              await apiInstance.post('pairing/',{tutorEmail:obtainedEmail,tuteeEmail:email,coursecode: coursecode} 
+               
+
+
+              );
+               await DeleteFromPending(obtainedEmail,coursecode);
 
         }
 
@@ -80,5 +97,17 @@ console.log(error)
 
 
 }
+
+}
+
+export const CourseList=async()=>{
+return apiInstance.get('course/');
+
+
+}
+
+
+export const GetPairings=async()=>{
+return apiInstance.get('pairing/');
 
 }

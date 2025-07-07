@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import apiInstance from '../utils/axios'; // keep this if using axios instance
 import { register } from '../utils/auth';
+import { useAuth } from '../utils/useAuth';
 
 function Register() {
   const [fullname, setFullname] = useState("");
@@ -25,6 +26,8 @@ function Register() {
      setIsLoading(false);
     if (error){alert(error);}
     else{
+      //const { isAuthenticated, currentUser, loading: authLoading } = useAuth();
+      
       navigate("/")
     }
   };
