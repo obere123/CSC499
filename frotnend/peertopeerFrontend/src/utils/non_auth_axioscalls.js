@@ -111,3 +111,65 @@ export const GetPairings=async()=>{
 return apiInstance.get('pairing/');
 
 }
+
+
+export const PairingsForTutees = async (tuteeEmail) => {
+  return apiInstance.get("pairing/forTutee", {
+    params: { tuteeEmail }
+  });
+};
+export const GetCourseName=async(coursename)=>{
+return apiInstance.get(`course-name/${coursename}/`)
+
+}
+
+
+export const GetPendings = async (email, category) => {
+    const params = {};
+    if (email) params.email = email;
+    if (category) params.category = category;
+    return apiInstance.get("pending/", { params });
+}
+
+
+export const AddCourseFunc=async(coursename,coursecode,course_description)=>{
+  try{
+
+apiInstance.post("course/", {coursename,coursecode,course_description}
+
+
+)
+  }catch(error){
+    alert("error in course is", error)
+    console.log(error)
+  }
+}
+
+
+
+export const GetMostRecentPendings=async()=>{
+try{
+
+  const response=await apiInstance.get("pending/oldest/");
+  return response.data
+}catch(error){
+
+alert(error.message)
+console.log("The error for presidentdashboard is", error)
+
+
+}
+
+}
+
+
+
+export const DeleteCourseFunc = async (coursename, coursecode) => {
+  
+    return await apiInstance.delete("deletecourse/", {
+    data: {
+      coursename: coursename,
+      coursecode: coursecode
+    }
+  });
+};

@@ -6,7 +6,6 @@ import { useAuthstore } from "../../store/auth";
 export default function PresidentNavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const {user} = useAuthstore()
-console.log(user)
   return (
     <nav className="bg-[#20508e] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,8 +27,8 @@ console.log(user)
               <Link to="/addCourse" className="hover:text-gray-300">
                 Add Course
               </Link>
-              <Link to="/calendar" className="hover:text-gray-300">
-                Calendar
+              <Link to="/deletecourse" className="hover:text-gray-300">
+                Delete Course
               </Link>
             </div>
           </div>
@@ -81,8 +80,8 @@ console.log(user)
           <Link to="/addCourse" className="block py-2 hover:text-gray-300">
             Add Course
           </Link>
-          <Link to="/calendar" className="block py-2 hover:text-gray-300">
-            Calendar
+          <Link to="/deletecourse" className="block py-2 hover:text-gray-300">
+            Delete Course
           </Link>
         </div>
       )}

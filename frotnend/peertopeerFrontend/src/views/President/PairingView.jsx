@@ -11,6 +11,8 @@ export default function PairingView() {
     const [error, setError] = useState(null);
     const { isAuthenticated, currentUser, loading: authLoading } = useAuth();
 
+    if(currentUser.category==="President"){
+
     useEffect(() => {
         const fetchPairings = async () => {
             try {
@@ -99,5 +101,5 @@ export default function PairingView() {
                 )}
             </div>
         </>
-    );
+    ); }else{<div>No entry to pairing view</div>} 
 }

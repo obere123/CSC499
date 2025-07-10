@@ -20,6 +20,8 @@ import TutorDashBoard from './views/Tutor/TutorDashBoard'
 import TutorCourseApplication from './views/Tutor/TutorCourseApplication'
 import PresidentDashBoard from './views/President/PresidentDashBoard'
 import PairingView from './views/President/PairingView'
+import AddCourse from './views/President/AddCourse'
+import DeleteCourse from './views/President/DeleteCourse'
 
 export default function App() {
   const { initializeAuth, loading } = useAuthstore();
@@ -52,6 +54,8 @@ export default function App() {
       <Route path='/tutorcourseapplication' element={<TutorCourseApplication/>}/>
       <Route path='/presidentdashboard' element={<PresidentDashBoard/>}/>
       <Route path ='/pairingview' element={<PairingView/>}/>
+      <Route path='/addCourse' element={<AddCourse/>}/>
+      <Route path='/deletecourse' element={<DeleteCourse/>}/>
      </Routes>
      </Router>
      {/* </MainWrapper> */}

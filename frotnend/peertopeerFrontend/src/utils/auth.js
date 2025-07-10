@@ -29,6 +29,8 @@ import apiInstance from "./axios";
 //start
 export const login = async (email, password) => {
     try {
+         localStorage.removeItem('auth_token');
+        localStorage.removeItem('refresh_token');
         console.log("🔍 Attempting login for:", email);
         
         const { data, status } = await apiInstance.post('user/token/', { email, password });

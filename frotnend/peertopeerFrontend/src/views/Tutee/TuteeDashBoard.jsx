@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TuteeNavBar from './TuteeNavBar';
 import { useAuth } from '../../utils/useAuth';
 import apiInstance from '../../utils/axios';
+import { PairingsForTutees } from "../../utils/non_auth_axioscalls";
 
 function TuteeDashBoard() {
  
@@ -14,7 +15,7 @@ function TuteeDashBoard() {
     const getTuteeDashBoardInfo = async (paramemail) => {
       try {
         setLoading(true);
-        const response = await apiInstance.get('pairing/', {
+        const response = await apiInstance.get('pairing/forTutee', {
           params: { tuteeEmail: paramemail },
         });
         
@@ -31,10 +32,10 @@ function TuteeDashBoard() {
       }
     };
 
-    if (currentUser?.username) {
-      getTuteeDashBoardInfo(currentUser.username);
+    if (currentUser?.email) {
+      getTuteeDashBoardInfo(currentUser?.email);
     }
-  },[currentUser?.username, authLoading]);
+  },[currentUser?.email, authLoading]);
 
   // Function to safely get course code
   const getCourseCode = (course) => {

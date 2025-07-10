@@ -43,11 +43,14 @@ function Login() {
 //     navigate("/tutordashboard")
 //    }
 try {
+    useAuthstore.getState().setUser(null); //start with this
+
       const token = response.data.access;
       const decodedToken = jwtDecode(token);
       console.log("Decoded token:", decodedToken);
       
       const userCategory = decodedToken.category;
+        useAuthstore.getState().setUser(decodedToken);
       
       if (userCategory === "Tutee") {
         navigate("/tuteedashboard");
