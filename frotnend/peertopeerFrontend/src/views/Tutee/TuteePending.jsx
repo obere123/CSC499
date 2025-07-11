@@ -26,7 +26,7 @@ export default function TuteePending(){
             console.log('Response data:', response.data);
             
             // Data is already filtered by backend
-            const userPendingRequests = response.data;
+            const userPendingRequests = response.data.results;
             
             // Get unique course codes to avoid duplicate API calls
             const uniqueCourseCodes = [...new Set(userPendingRequests.map(request => request.coursecode))];
@@ -86,7 +86,7 @@ export default function TuteePending(){
         if (currentUser && currentUser.category === "Tutee") {
             fetchPendingRequests();
         }
-    }, [currentUser]);
+    }, []);
 
     if (authLoading || loading) {
         return (

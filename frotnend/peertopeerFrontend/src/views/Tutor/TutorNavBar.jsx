@@ -34,16 +34,16 @@ export default function TutornavBar() {
                 Course Application
               </Link>
               <Link 
-                to="/projects" 
+                to="/tutorpending" 
                 className="px-3 py-2 text-sm font-medium hover:text-gray-300 transition-colors duration-200"
               >
                 Pending
               </Link>
               <Link 
-                to="/calendar" 
+                to="/addLogbook" 
                 className="px-3 py-2 text-sm font-medium hover:text-gray-300 transition-colors duration-200"
               >
-                Requests
+                LogBook
               </Link>
             </div>
           </div>
@@ -105,18 +105,18 @@ export default function TutornavBar() {
             Course Application
           </Link>
           <Link
-            to="/projects"
+            to="/tutorpending"
             className="block px-3 py-2 text-base font-medium text-white hover:text-gray-300 hover:bg-blue-700 rounded-md transition-colors duration-200"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Projects O
+            Pending
           </Link>
           <Link
-            to="/calendar"
+            to="/addLogbook"
             className="block px-3 py-2 text-base font-medium text-white hover:text-gray-300 hover:bg-blue-700 rounded-md transition-colors duration-200"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Calendars
+            LogBook
           </Link>
         </div>
       </div>

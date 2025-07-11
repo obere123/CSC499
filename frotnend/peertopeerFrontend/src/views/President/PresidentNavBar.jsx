@@ -30,6 +30,9 @@ export default function PresidentNavBar() {
               <Link to="/deletecourse" className="hover:text-gray-300">
                 Delete Course
               </Link>
+              <Link to="/viewLogbook" className="hover:text-gray-300">
+                View LogBook
+              </Link>
             </div>
           </div>
 

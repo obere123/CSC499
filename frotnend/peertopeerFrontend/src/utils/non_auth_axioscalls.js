@@ -128,7 +128,7 @@ export const GetPendings = async (email, category) => {
     const params = {};
     if (email) params.email = email;
     if (category) params.category = category;
-    return apiInstance.get("pending/", { params });
+    return apiInstance.get("getPendingByEmail/", { params });
 }
 
 
@@ -173,3 +173,37 @@ export const DeleteCourseFunc = async (coursename, coursecode) => {
     }
   });
 };
+
+
+export const AddtoLogBook=async(tutorEmail,tuteeEmail,courseCode,log )=> {
+
+  try{apiInstance.post('addToLog/',{
+    
+    
+    tutorEmail,
+    tuteeEmail,
+    courseCode,
+    
+    log
+  })}
+  
+  catch(error){
+    
+    
+    alert("The logbook error is", error);
+  console.log("The logbook error is", error);
+  
+  }
+
+}
+
+export const DisplayLog = async (tutorEmail, tuteeEmail, courseCode) => {
+  const response = await apiInstance.get("getLogBookEntries/", {
+    params: {
+      tutorEmail,
+      tuteeEmail,
+      courseCode
+    }
+  });
+  return response.data.results;
+}

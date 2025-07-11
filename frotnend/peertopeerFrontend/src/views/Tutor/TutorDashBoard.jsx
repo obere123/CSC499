@@ -15,20 +15,21 @@ export default function TutorDashBoard(){
  useEffect(() => {
     const getTutorDashBoardInfo = async (paramemail) => {
       try {
-        const response = await apiInstance.get('pairing/', {
+        const response = await apiInstance.get('getTutorPairings/', {
           params: { tutorEmail: paramemail },
         });
         // If response is an array:
-        setCourses(response.data);
+        setCourses(response.data.results|| []);
+        console.log(response.data)
       } catch (error) {
         console.error('Error fetching dashboard info:', error);
       }
     };
 
-    if (currentUser?.username) {
-      getTutorDashBoardInfo(currentUser.username);
+    if (currentUser?.email) {
+      getTutorDashBoardInfo(currentUser.email);
     }
-  }, [currentUser]);
+  }, [currentUser?.email]);
 
   if (currentUser.category === "Tutor") {
     return (
@@ -45,7 +46,7 @@ export default function TutorDashBoard(){
 
           {/* Courses Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {courses.map((course, index) => (
+            {courses.length > 0 && courses.map((course, index) => (
               <div
                 key={index}
                 className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200"
@@ -53,13 +54,13 @@ export default function TutorDashBoard(){
                 {/* Course Code Badge */}
                 <div className="mb-4">
                   <span className="inline-block bg-[#20508e] text-white text-sm font-semibold px-4 py-2 rounded-full">
-                    {course.courseCode?.coursecode || "N/A"}
+                    {course.courseCode__coursecode || "N/A"}
                   </span>
                 </div>
 
                 {/* Course Title */}
                 <h2 className="text-xl font-bold text-gray-900 mb-4">
-                  {course.courseCode?.coursename || "No Name"}
+                  {course.courseCode__coursename || "No Name"}
                 </h2>
 
                 {/* Instructor Info */}
@@ -68,7 +69,7 @@ export default function TutorDashBoard(){
                     {course.tutorEmail ? course.tutorEmail.charAt(0).toUpperCase() : "?"}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">{course.tutorEmail}</p>
+                    <p className="text-sm font-semibold text-gray-900">{course.tuteeEmail}</p>
                   </div>
                 </div>
 

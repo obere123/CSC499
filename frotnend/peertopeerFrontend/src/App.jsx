@@ -22,6 +22,9 @@ import PresidentDashBoard from './views/President/PresidentDashBoard'
 import PairingView from './views/President/PairingView'
 import AddCourse from './views/President/AddCourse'
 import DeleteCourse from './views/President/DeleteCourse'
+import ViewLogBook from './views/President/ViewLogBook'
+import LogBook from './views/Tutor/LogBook'
+import TutorPending from './views/Tutor/TutorPending'
 
 export default function App() {
   const { initializeAuth, loading } = useAuthstore();
@@ -56,6 +59,9 @@ export default function App() {
       <Route path ='/pairingview' element={<PairingView/>}/>
       <Route path='/addCourse' element={<AddCourse/>}/>
       <Route path='/deletecourse' element={<DeleteCourse/>}/>
+      <Route path='/viewLogbook' element={<ViewLogBook/>}/>
+      <Route path='addLogbook' element={<LogBook/>}/>
+      <Route path='/tutorpending' element={<TutorPending/>}/>
      </Routes>
      </Router>
      {/* </MainWrapper> */}
